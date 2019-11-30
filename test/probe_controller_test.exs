@@ -3,6 +3,8 @@ defmodule ExploringMars.ProbeControllerTest do
   alias ExploringMars.ProbeController
   alias ExploringMars.ProbeState
 
+  doctest ExploringMars.ProbeController
+
   setup do
     registry = start_supervised!(ProbeController)
     %{registry: registry}

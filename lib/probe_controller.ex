@@ -1,4 +1,7 @@
 defmodule ExploringMars.ProbeController do
+  @moduledoc """
+  Provides function to control the probes.
+  """
   use GenServer
   alias ExploringMars.ProbeState
   alias ExploringMars.DataNormalizer
@@ -21,9 +24,17 @@ defmodule ExploringMars.ProbeController do
     {:ok, state}
   end
 
+  @doc """
+  Function that issues commands to turn around or move the probe.
+
+    ## Examples
+    iex> ExploringMars.ProbeController.issue_command("LLRRMRRMLL")
+    %ProbeState{current_facing: :north, positionX: 0, positionY: 0}
+
+  """
   def issue_command(input_data) do
     commands = DataNormalizer.normalize(input_data)
-    Enum.map(commands, fn command -> GenServer.call(@name, command) end)
+    Enum.each(commands, fn command -> GenServer.call(@name, command) end)
 
     get_state()
   end
