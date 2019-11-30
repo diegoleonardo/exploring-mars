@@ -14,7 +14,10 @@ defmodule ExploringMars.ProbeController do
     )
   end
 
+  @impl true
   def init(state) do
+    :ets.new(@name, [:named_table, read_concurrency: true])
+    :ets.insert(@name, {"state", state})
     {:ok, state}
   end
 
@@ -26,30 +29,49 @@ defmodule ExploringMars.ProbeController do
   end
 
   def get_state() do
-    GenServer.call(@name, :get_state)
+    [{_, state}] = :ets.lookup(@name, "state")
+    state
   end
 
-  def handle_call(:get_state, _from, state) do
-    {:reply,
-     %ProbeState{
-       current_facing: state.current_facing,
-       positionX: state.positionX,
-       positionY: state.positionY
-     }, state}
-  end
+  @impl true
+  def handle_call(:left, _, _) do
+    state = get_state()
 
-  def handle_call(:left, _from, state) do
     new_facing = rotate_to_left(state.current_facing)
 
     new_state = %{state | current_facing: new_facing}
 
+    :ets.insert(@name, {"state", new_state})
+
     {:reply, new_state, new_state}
   end
 
-  def handle_call(:right, _from, state) do
+  @impl true
+  def handle_call(:right, _, _) do
+    state = get_state()
+
     new_facing = rotate_to_right(state.current_facing)
 
     new_state = %{state | current_facing: new_facing}
+
+    :ets.insert(@name, {"state", new_state})
+
+    {:reply, new_state, new_state}
+  end
+
+  @impl true
+  def handle_call(:move, _, _) do
+    state = get_state()
+
+    new_state =
+      case state.current_facing do
+        :east -> %{state | positionX: state.positionX + 1}
+        :west -> %{state | positionX: state.positionX - 1}
+        :north -> %{state | positionY: state.positionY + 1}
+        :south -> %{state | positionY: state.positionY - 1}
+      end
+
+    :ets.insert(@name, {"state", new_state})
 
     {:reply, new_state, new_state}
   end
