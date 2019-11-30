@@ -1,0 +1,9 @@
+{application,exploring_mars,
+             [{applications,[kernel,stdlib,elixir,logger]},
+              {description,"exploring_mars"},
+              {modules,['Elixir.ExploringMars',
+                        'Elixir.ExploringMars.DataNormalizer',
+                        'Elixir.ExploringMars.ProbeController',
+                        'Elixir.ExploringMars.ProbeState']},
+              {registered,[]},
+              {vsn,"0.1.0"}]}.
