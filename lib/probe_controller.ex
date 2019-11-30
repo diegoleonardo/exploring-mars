@@ -3,6 +3,8 @@ defmodule ExploringMars.ProbeController do
   alias ExploringMars.ProbeState
   alias ExploringMars.DataNormalizer
   @name :probe_controller
+  @rotate_to_left %{:north => :west, :east => :south, :south => :east, :west => :south}
+  @rotate_to_right %{:north => :east, :east => :south, :south => :west, :west => :north}
 
   def start_link(_) do
     GenServer.start_link(
@@ -36,7 +38,7 @@ defmodule ExploringMars.ProbeController do
      }, state}
   end
 
-  def handle_call("L", _from, state) do
+  def handle_call(:left, _from, state) do
     new_facing = rotate_to_left(state.current_facing)
 
     new_state = %{state | current_facing: new_facing}
@@ -44,7 +46,7 @@ defmodule ExploringMars.ProbeController do
     {:reply, new_state, new_state}
   end
 
-  def handle_call("R", _from, state) do
+  def handle_call(:right, _from, state) do
     new_facing = rotate_to_right(state.current_facing)
 
     new_state = %{state | current_facing: new_facing}
@@ -53,20 +55,10 @@ defmodule ExploringMars.ProbeController do
   end
 
   defp rotate_to_left(current_facing) do
-    case current_facing do
-      :north -> :west
-      :east -> :south
-      :south -> :east
-      :west -> :south
-    end
+    @rotate_to_left[current_facing]
   end
 
   defp rotate_to_right(current_facing) do
-    case current_facing do
-      :north -> :east
-      :east -> :south
-      :south -> :west
-      :west -> :north
-    end
+    @rotate_to_right[current_facing]
   end
 end

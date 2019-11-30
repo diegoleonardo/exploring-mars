@@ -3,7 +3,7 @@ defmodule ExploringMars.DataNormalizeTest do
   alias ExploringMars.DataNormalizer
 
   test "When input data in lower case, should convert a list in upcase" do
-    expected = ["L", "R", "L", "R", "M", "M", "M", "M", "L", "R"]
+    expected = [:left, :right, :left, :right, :move, :move, :move, :move, :left, :right]
     input = "lrlrmmmmlr"
     result = DataNormalizer.normalize(input)
 
