@@ -3,7 +3,7 @@ defmodule ExploringMars.ProbeController do
   alias ExploringMars.ProbeState
   alias ExploringMars.DataNormalizer
   @name :probe_controller
-  @rotate_to_left %{:north => :west, :east => :south, :south => :east, :west => :south}
+  @rotate_to_left %{:north => :west, :west => :south, :south => :east, :east => :north}
   @rotate_to_right %{:north => :east, :east => :south, :south => :west, :west => :north}
 
   def start_link(_) do

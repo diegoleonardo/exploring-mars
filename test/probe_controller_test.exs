@@ -22,6 +22,22 @@ defmodule ExploringMars.ProbeControllerTest do
 
       assert expected_result == result
     end
+
+    test "when turn left four times, should facing to north" do
+      expected = get_space_probe(:north)
+
+      result = ProbeController.issue_command("llll")
+
+      assert expected == result
+    end
+
+    test "when turn right four times, should facing to north" do
+      expected = get_space_probe(:north)
+
+      result = ProbeController.issue_command("rrrr")
+
+      assert expected == result
+    end
   end
 
   describe "Probe facing to east" do
