@@ -4,7 +4,6 @@ defmodule ExploringMars do
   """
   alias ExploringMars.ProbeController
   alias ExploringMars.DataNormalizer
-  alias ExploringMars.ProbeState
 
   def start(current_facing, positionX, positionY) do
     ProbeController.start_link(current_facing, positionX, positionY)

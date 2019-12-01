@@ -1,5 +1,5 @@
 defmodule ExploringMars.ProbeControllerTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case
   alias ExploringMars.ProbeController
   alias ExploringMars.ProbeState
 
