@@ -8,11 +8,16 @@ defmodule ExploringMars.ProbeController do
   @name :probe_controller
   @rotate_to_left %{:north => :west, :west => :south, :south => :east, :east => :north}
   @rotate_to_right %{:north => :east, :east => :south, :south => :west, :west => :north}
+  @cardinal_points %{"N" => :north, "S" => :south, "E" => :east, "W" => :west}
 
-  def start_link(_) do
+  def start_link(current_facing, positionX, positionY) do
     GenServer.start_link(
       __MODULE__,
-      %ProbeState{current_facing: :north, positionX: 0, positionY: 0},
+      %ProbeState{
+        current_facing: @cardinal_points[current_facing],
+        positionX: String.to_integer(positionX),
+        positionY: String.to_integer(positionY)
+      },
       name: @name
     )
   end
@@ -33,7 +38,8 @@ defmodule ExploringMars.ProbeController do
 
   """
   def issue_command(input_data) do
-    commands = DataNormalizer.normalize(input_data)
+    commands = DataNormalizer.normalize_command(input_data)
+
     Enum.each(commands, fn command -> GenServer.call(@name, command) end)
 
     get_state()

@@ -1,13 +1,13 @@
 defmodule ExploringMars.ProbeControllerTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
   alias ExploringMars.ProbeController
   alias ExploringMars.ProbeState
 
   doctest ExploringMars.ProbeController
 
   setup do
-    registry = start_supervised!(ProbeController)
-    %{registry: registry}
+    ExploringMars.ProbeController.start_link("N", "0", "0")
+    :ok
   end
 
   describe "Probe facing to north" do
