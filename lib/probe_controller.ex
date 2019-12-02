@@ -38,8 +38,6 @@ defmodule ExploringMars.ProbeController do
     new_state = %{state | current_facing: new_facing}
 
     insert({id, new_state})
-
-    new_state
   end
 
   def handle({id, :right}) do
@@ -50,8 +48,6 @@ defmodule ExploringMars.ProbeController do
     new_state = %{state | current_facing: new_facing}
 
     insert({id, new_state})
-
-    new_state
   end
 
   def handle({id, :move}) do
@@ -60,8 +56,6 @@ defmodule ExploringMars.ProbeController do
     new_state = ProbeState.move(state)
 
     insert({id, new_state})
-
-    new_state
   end
 
   defp create_table(initial_state) do
@@ -71,6 +65,7 @@ defmodule ExploringMars.ProbeController do
 
   defp insert({id, new_state}) do
     :ets.insert(get_table_name(id), {id, new_state})
+    new_state
   end
 
   defp get_table_name(id) do
