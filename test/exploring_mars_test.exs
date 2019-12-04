@@ -17,4 +17,11 @@ defmodule ExploringMarsTest do
 
     assert expected == result
   end
+
+  test "When receive input data, should return state for two probes." do
+    expected = "1 3 N\n5 1 E\n"
+    result = ExploringMars.issue_command("5 5\n 1 2 N LMLMLMLMM\n3 3 E\n MMRMMRMRRM")
+
+    assert expected == result
+  end
 end
