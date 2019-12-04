@@ -10,11 +10,11 @@ To use the API you just have to clone this project and run with the following in
 
 - Go to the root of the project that you just cloned and run:
  
- iex -S mix
+  iex -S mix
 
 - Inside Interactive Elixir, to execute the api, just run the command:
 
- iex(1)> ExploringMars.issue_command("5 5\n 1 2 N LMLMLMLMM\n3 3 E\n MMRMMRMRRM")
+  iex(1)> ExploringMars.issue_command("5 5\n 1 2 N LMLMLMLMM\n3 3 E\n MMRMMRMRRM")
 
 
 
