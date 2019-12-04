@@ -21,18 +21,20 @@ To use the API you just have to clone this project and run with the following in
 ## Improvements
 1 - The input data of the problem:
 The problem asks the following format:
-
+```
 Initial Coordination
 Initial State
 Commands
 ...
+```
 
 Currently, the API accepts in the following format:
-
+```
 Initial Coordination
 Initial State Commands
 Initial State Command
 ...
+```
 
 2 - Improvement of the tests:
 Improve names, write more tests, doctests and remove possible duplicated tests.
