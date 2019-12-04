@@ -5,6 +5,16 @@ Basically, the problem consists of an API that receives input commands to contro
 
 The problem can be found, in a txt file called " exploring_mars", on the root of the project.
 
+This APIs has the following formats:
+
+- Input Format: "Initial coordination\n Initial state Commands\n"
+
+  e.g. "5 5\n 1 2 N LMRLMR"
+
+- Output format: "Position X Position Y Facing Position"
+
+  e.g. "1 3 N" 
+
 To use the API you just have to clone this project and run with the following instructions:
 - Clone this project
 
